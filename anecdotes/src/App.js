@@ -9,6 +9,10 @@ const App = () => {
     dispatch(increaseVote(id))
   }
 
+  const submitForm = (e) => {
+    dispatch(addAnectode(e))
+  }
+
   return (
     <div>
       <h2>Anecdotes</h2>
@@ -24,8 +28,8 @@ const App = () => {
         </div>
       )}
       <h2>create new</h2>
-      <form onSubmit={ addAnectode }>
-        <div><input /></div>
+      <form onSubmit={ submitForm }>
+        <div><input className='anectode-name' /></div>
         <button>create</button>
       </form>
     </div>
