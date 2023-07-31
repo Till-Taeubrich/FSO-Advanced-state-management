@@ -5,14 +5,17 @@ const AnectodeForm = () => {
 
   const dispatch = useDispatch()
 
-  const submitForm = (e) => {
-    dispatch(addAnectode(e))
+  const submitAnectode = (e) => {
+		e.preventDefault()
+
+		const anectodeName = e.target.querySelector('.anectode-name').value
+    dispatch(addAnectode(anectodeName))
   }
 
   return (
 		<>
 			<h2>create new</h2>
-			<form onSubmit={submitForm}>
+			<form onSubmit={submitAnectode}>
 				<div>
 					<input className="anectode-name" />
 				</div>

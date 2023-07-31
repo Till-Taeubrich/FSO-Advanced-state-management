@@ -10,7 +10,7 @@ const AnecdoteList = () => {
 
   const filteredAnecdotes = filter ? anecdotes.filter(anecdote => anecdote.content.includes(filter)) : anecdotes
 
-  const sortedAnecdotes = filteredAnecdotes.sort((a, b) => {
+  const sortedAnecdotes = filteredAnecdotes.toSorted((a, b) => {
     return a.votes < b.votes
   })
   

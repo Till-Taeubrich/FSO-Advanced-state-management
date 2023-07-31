@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit'
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -19,10 +21,12 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'INCREASE_VOTE':
-      const id = action.payload.id
+const anectodesSlice = createSlice({
+  name: 'anectodes',
+  initialState,
+  reducers: {
+    increaseVote(state, action) {
+      const id = action.payload
       const anecdoteToChange = state.find(a => a.id === id)
       const changedAnecdote = {
         ...anecdoteToChange,
@@ -31,8 +35,8 @@ const reducer = (state = initialState, action) => {
       return state.map(anectode => 
         anectode.id !== id ? anectode : changedAnecdote
       )
-      
-    case 'ADD_ANECTODE':
+    },
+    addAnectode(state, action) {
       const newAnectodeContent = action.payload
       const newAnecdoteObj = {
         content: newAnectodeContent,
@@ -40,28 +44,9 @@ const reducer = (state = initialState, action) => {
         votes: 0
       }
       return state.concat(newAnecdoteObj)
+    }
+  },
+})
 
-    default:
-      return state
-  }
-
-}
-
-export const increaseVote = (id) => {
-  return {
-    type: 'INCREASE_VOTE',
-    payload: { id }
-  }
-}
-
-export const addAnectode = (e) => {
-  e.preventDefault()
-  const anectodeName = e.target.querySelector('.anectode-name').value
-
-  return {
-    type: 'ADD_ANECTODE',
-    payload: anectodeName
-  }
-}
-
-export default reducer
+export const { increaseVote, addAnectode} = anectodesSlice.actions
+export default anectodesSlice.reducer
