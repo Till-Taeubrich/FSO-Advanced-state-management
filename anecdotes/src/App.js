@@ -3,8 +3,7 @@ import AnectodeForm from './components/AnectodeForm'
 import AnecdoteList from './components/AnectodeList'
 import Filter from './components/Filter'
 import Notification from './components/Notification'
-import anectodeService from './services/anectodeService'
-import { initializeAnectodes, setAnectodes } from './reducers/anecdoteReducer'
+import { initializeAnectodes } from './reducers/anecdoteReducer'
 import { useDispatch } from 'react-redux'
 
 const App = () => {
