@@ -32,5 +32,12 @@ export const initializeAnectodes = () => {
   }
 }
 
+export const createAnectode = (anectodeName) => {
+  return async dispatch => {
+		const newAnecdote = await anectodeService.create(anectodeName)
+    dispatch(addAnectode(newAnecdote))
+  }
+}
+
 export const { increaseVote, addAnectode, setAnectodes } = anectodesSlice.actions
 export default anectodesSlice.reducer
