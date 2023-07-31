@@ -16,15 +16,9 @@ const anectodesSlice = createSlice({
       )
     },
     addAnectode(state, action) {
-      const newAnectodeContent = action.payload
-      const newAnecdoteObj = {
-        content: newAnectodeContent,
-        votes: 0
-      }
-      return state.concat(newAnecdoteObj)
+      return state.concat(action.payload)
     },
     setAnectodes(state, action) {
-      console.log('🚀 ~ file: anecdoteReducer.js:27 ~ setAnectodes ~ action:', action)
       return action.payload
     }
   },
