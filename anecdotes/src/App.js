@@ -4,16 +4,14 @@ import AnecdoteList from './components/AnectodeList'
 import Filter from './components/Filter'
 import Notification from './components/Notification'
 import anectodeService from './services/anectodeService'
-import { setAnectodes } from './reducers/anecdoteReducer'
+import { initializeAnectodes, setAnectodes } from './reducers/anecdoteReducer'
 import { useDispatch } from 'react-redux'
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    anectodeService.getAll().then((res) => {
-      dispatch(setAnectodes(res))
-    })
+    dispatch(initializeAnectodes())
   }, [dispatch])
 
   return (

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import anectodeService from '../services/anectodeService'
 
 const anectodesSlice = createSlice({
   name: 'anectodes',
@@ -23,6 +24,13 @@ const anectodesSlice = createSlice({
     }
   },
 })
+
+export const initializeAnectodes = () => {
+  return async dispatch => {
+    const anecdotes = await anectodeService.getAll()
+    dispatch(setAnectodes(anecdotes))
+  }
+}
 
 export const { increaseVote, addAnectode, setAnectodes } = anectodesSlice.actions
 export default anectodesSlice.reducer
