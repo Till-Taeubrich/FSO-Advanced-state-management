@@ -35,7 +35,7 @@ export const initializeAnectodes = () => {
 export const createAnectode = (anectodeName) => {
   return async dispatch => {
 		const newAnecdote = await anectodeService.create(anectodeName)
-    dispatch(addAnectode(newAnecdote.id))
+    dispatch(addAnectode(newAnecdote))
   }
 }
 
