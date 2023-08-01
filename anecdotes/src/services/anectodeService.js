@@ -13,4 +13,21 @@ const create = async (content) => {
   return response.data
 }
 
-export default { getAll, create }
+const addVote = async (content) => {
+  const allNotes = await getAll()
+
+  const noteToChange = allNotes.find(note => note.id === content)
+
+  const updatedNote = {
+    ...noteToChange,
+    votes: noteToChange.votes + 1
+  }
+
+  const url = `${baseUrl}/${content}`
+
+  const request = await axios.put(url, updatedNote)
+
+  return request.data
+}
+
+export default { getAll, create, addVote}
