@@ -1,25 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { changeNotificationContent } from '../reducers/notificationReducer'
-
-let triggerNotification
+import { useSelector } from 'react-redux'
 
 const Notification = () => {
-
-  const dispatch = useDispatch()
 
   const notification = useSelector(state => state.notification)
   const style = {
     border: 'solid',
     padding: 10,
     borderWidth: 1
-  }
-
-  triggerNotification = (message) => {
-    dispatch(changeNotificationContent(message))
-        
-    setTimeout(() => {
-      dispatch(changeNotificationContent(''))
-    }, 5000);
   }
 
   return (
@@ -29,5 +16,4 @@ const Notification = () => {
   )
 }
 
-export { triggerNotification }
 export default Notification

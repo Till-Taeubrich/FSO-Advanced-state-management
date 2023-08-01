@@ -11,5 +11,18 @@ const notificationSlice = createSlice({
   },
 })
 
+  export const triggerNotification = (message, seconds) => {
+    return dispatch => {
+      const timeout = Number(`${seconds}00`)
+      console.log('🚀 ~ file: Notification.js:21 ~ Notification ~ timeout:', timeout)
+
+      dispatch(changeNotificationContent(message))
+
+      setTimeout(() => {
+        dispatch(changeNotificationContent(''))
+      }, timeout);
+    }
+  }
+
 export const { changeNotificationContent } = notificationSlice.actions
 export default notificationSlice.reducer

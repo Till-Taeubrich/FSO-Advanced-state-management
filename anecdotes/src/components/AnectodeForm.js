@@ -1,15 +1,17 @@
+import { useDispatch } from 'react-redux'
 import { createAnectode } from '../reducers/anecdoteReducer'
-import { triggerNotification } from './Notification'
+import { triggerNotification } from '../reducers/notificationReducer'
 
 const AnectodeForm = () => {
+	const dispatch = useDispatch()
 
   const submitAnectode = async (e) => {
 		e.preventDefault()
 		const anectodeName = e.target.querySelector('.anectode-name').value
 
-		createAnectode(anectodeName)
+		dispatch(createAnectode(anectodeName))
 
-		triggerNotification(`You added ${anectodeName}`)
+		dispatch(triggerNotification(`You added ${anectodeName}`, 50))
   }
 
   return (
