@@ -1,10 +1,18 @@
+import { useMutation, useQueryClient } from "react-query"
+import { createAnectode } from "../requests"
+
 const AnecdoteForm = () => {
+  const queryClient = useQueryClient()
+  const anectodeMutation = useMutation(createAnectode, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('anectodes')
+    }
+  })
 
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
-    event.target.anecdote.value = ''
-    console.log('new anecdote')
+    anectodeMutation.mutate({ content, votes: 0 })
 }
 
   return (
