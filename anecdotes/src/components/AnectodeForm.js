@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux'
 import { createAnectode } from '../reducers/anecdoteReducer'
-import { triggerNotification } from '../reducers/notificationReducer'
+import { useNotificationDispatch } from '../NotificationContext'
 
 const AnectodeForm = () => {
 	const dispatch = useDispatch()
+
+	const notificationDispatch = useNotificationDispatch()
 
   const submitAnectode = async (e) => {
 		e.preventDefault()
@@ -11,7 +13,10 @@ const AnectodeForm = () => {
 
 		dispatch(createAnectode(anectodeName))
 
-		dispatch(triggerNotification(`You added ${anectodeName}`, 50))
+		notificationDispatch({ type: 'CHANGE_MESSAGE', payload: `You added ${anectodeName}` })
+    setTimeout(() => {
+      notificationDispatch({ type: 'RESET_MESSAGE' })
+    }, 5000);
   }
 
   return (
