@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { addVote } from '../reducers/anecdoteReducer'
-import { triggerNotification } from '../reducers/notificationReducer'
+import { useNotificationDispatch } from '../NotificationContext'
 
 const AnecdoteList = () => {
 
   const dispatch = useDispatch()
+  const notificationDispatch = useNotificationDispatch()
 
   const filter = useSelector(state => state.filter)
   const anecdotes = useSelector(state => state.anecdotes)
@@ -17,7 +18,10 @@ const AnecdoteList = () => {
   
   const vote = (anecdote) => {
     dispatch(addVote(anecdote.id))
-    dispatch(triggerNotification(`You voted ${anecdote.content}`, 50))
+    notificationDispatch({ type: 'CHANGE_MESSAGE', payload: `You voted ${anecdote.content}` })
+    setTimeout(() => {
+      notificationDispatch({ type: 'RESET_MESSAGE' })
+    }, 5000);
   }
 
   return (
