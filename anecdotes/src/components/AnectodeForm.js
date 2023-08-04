@@ -9,14 +9,18 @@ const AnectodeForm = () => {
 
   const submitAnectode = async (e) => {
 		e.preventDefault()
+
 		const anectodeName = e.target.querySelector('.anectode-name').value
 
-		dispatch(createAnectode(anectodeName))
+		if (anectodeName.length < 5) {
+			notificationDispatch({ type: 'CHANGE_MESSAGE', payload: 'too short anecdote, must have length 5 or more' })
+			setTimeout(() => {
+				notificationDispatch({ type: 'RESET_MESSAGE' })
+			}, 5000);
+			return
+		}
 
-		notificationDispatch({ type: 'CHANGE_MESSAGE', payload: `You added ${anectodeName}` })
-    setTimeout(() => {
-      notificationDispatch({ type: 'RESET_MESSAGE' })
-    }, 5000);
+		dispatch(createAnectode(anectodeName))
   }
 
   return (
